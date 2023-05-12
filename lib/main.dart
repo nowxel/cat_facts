@@ -1,7 +1,5 @@
 import 'package:cat_facts/cubit/cat_fact_cubit.dart';
-import 'package:cat_facts/cubit/cat_image_cubit.dart';
 import 'package:cat_facts/data/cat_fact_repository.dart';
-import 'package:cat_facts/data/cat_image_repository.dart';
 import 'package:cat_facts/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,17 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<CatFactCubit>(
-          create: (BuildContext context) =>
-              CatFactCubit(CatFactRepository.instance)..fetchRandomFact(),
-        ),
-        BlocProvider<CatImageCubit>(
-          create: (BuildContext context) =>
-              CatImageCubit(CatImageRepository.instance)..fetchRandomImage(),
-        ),
-      ],
+    return BlocProvider<CatFactCubit>(
+      create: (context) =>
+      CatFactCubit(CatFactRepository.instance)..fetchRandomFact(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

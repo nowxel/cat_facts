@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cat_facts/data/cat_fact.dart';
 import 'package:http/http.dart' as http;
@@ -18,5 +19,11 @@ class CatFactRepository {
     } catch (e) {
       throw const SocketException("Something went wrong");
     }
+  }
+
+  Future<Uint8List> fetchCatImage() async {
+    final url = Uri.parse("https://cataas.com/cat");
+    final response = await http.get(url);
+    return response.bodyBytes;
   }
 }
