@@ -37,18 +37,11 @@ class HomePage extends StatelessWidget {
           actions: [
             IconButton(
                 onPressed: () async {
-                  _createFact({
-                    "fact": state.cat.fact,
-                    "createdAt": DateTime.now(),
-                  });
-                  // box.put(
-                  //     'catFact', FactHistory(state.cat.fact, DateTime.now()));
-
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => FactHistoryPage(
-                              items: _items,
+                              items: _items.toSet().toList(),
                             )),
                   );
                 },
