@@ -7,6 +7,10 @@ class FactService {
   Future<void> init() async {
     Hive.registerAdapter(FactHistoryAdapter());
     _facts = await Hive.openBox<FactHistory>("facts");
+
+    await _facts.clear();
+
+    await _facts.add(FactHistory("fact", DateTime.now()));
   }
 
   List<FactHistory> getFacts() {
