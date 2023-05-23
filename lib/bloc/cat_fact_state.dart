@@ -1,4 +1,4 @@
-part of 'cat_fact_cubit.dart';
+part of 'cat_fact_bloc.dart';
 
 @freezed
 class CatFactState with _$CatFactState {

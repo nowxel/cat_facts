@@ -13,6 +13,6 @@ class CatFact with _$CatFact {
   factory CatFact.fromJson(Map<String, dynamic> json) => _$CatFactFromJson(json);
 
   factory CatFact.empty() => const _CatFact(
-        fact: '',
-      );
+    fact: '',
+  );
 }

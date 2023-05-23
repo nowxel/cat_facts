@@ -48,6 +48,7 @@ dependencies:
   retrofit: ^4.0.1
   dio: ^5.1.2
   retrofit_generator: ^6.0.0+3
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

@@ -1,24 +1,33 @@
+import 'package:cat_facts/model/fact_history.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/intl.dart';
 
 class FactHistoryPage extends StatelessWidget {
-  final List<Map<String, dynamic>> items;
-
-  const FactHistoryPage({Key? key, required this.items}) : super(key: key);
+  const FactHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (BuildContext context, int index) {
-          final currentItem = items[index];
-          return ListTile(
-            title: Text(currentItem["fact"]),
-            subtitle: Text(currentItem["createdAt"].toString()),
-          );
-        },
+      appBar: AppBar(
+        title: const Text('Fact History'),
       ),
+      body: Hive.box('catFacts').isEmpty
+          ? Container()
+          : ListView.builder(
+              itemCount: Hive.box('catFacts').length,
+              itemBuilder: (context, index) {
+                final catFact = Hive.box('catFacts')
+                        .getAt(Hive.box('catFacts').length - 1 - index)
+                    as FactHistory;
+                final formattedDate =
+                    DateFormat('y MMM d hh:mm:ss').format(catFact.createdAt);
+                return ListTile(
+                  title: Text(catFact.fact),
+                  subtitle: Text(formattedDate),
+                );
+              },
+            ),
     );
   }
 }
